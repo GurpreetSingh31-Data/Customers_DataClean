@@ -22,7 +22,7 @@ Steps Involved in Data Cleaning
 Duplicates are removed based on multiple columns including customerNumber, customerName, and other relevant fields.
 A ROW_NUMBER() function is used to identify and remove duplicate rows.  
 
-#### with duplicate_cte as (
+with duplicate_cte as (
     select *, row_number() over (
         partition by customerNumber, customerName, contactfirstname, contactlastname, phone, addressline1, city, state, postalcode, country, salesrepemployeenumber, creditlimit
     ) as row_num
@@ -33,13 +33,13 @@ A ROW_NUMBER() function is used to identify and remove duplicate rows.
 Trim any unnecessary whitespace from fields like contactfirstname, customername, addressline1, city, and phone.
 Remove dots and spaces from phone numbers.  
 
-#### update customers_details
+update customers_details
 set contactfirstname = trim(contactfirstname);
 
-#### update customers_details
+update customers_details
 set phone = trim(replace(phone, ' ', ''));
 
-#### update customers_details
+update customers_details
 set phone = trim(replace(phone, '.', ''));
 
 ### Handle Null or Blank Values:  
@@ -50,7 +50,7 @@ Since the dataset's important columns don't have null or blank values, no specif
 
 Dropped addressLine2 as it was deemed unnecessary for the analysis.  
 
-#### ALTER TABLE customers_details
+ALTER TABLE customers_details
 DROP COLUMN addressLine2;
 
 ### How to Use the Project  
