@@ -22,14 +22,14 @@ Steps Involved in Data Cleaning
 Duplicates are removed based on multiple columns including customerNumber, customerName, and other relevant fields.
 A ROW_NUMBER() function is used to identify and remove duplicate rows.  
 
-**with duplicate_cte as (
+***with duplicate_cte as (
     select *, row_number() over (
         partition by customerNumber, customerName, contactfirstname, contactlastname, phone, addressline1, city, state, postalcode, country, salesrepemployeenumber, creditlimit
     ) as row_num
     from customers_details
 )  select * 
 from duplicate_cte
-where row_num = 1;**  
+where row_num = 1;***  
 
 ### Standardize the Data:  
 
